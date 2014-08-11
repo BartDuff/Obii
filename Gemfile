@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'gravatar_image_tag', '1.0.0.pre2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
 # Use sqlite3 as the database for Active Record
@@ -38,3 +38,16 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :development do
+  gem 'rspec-rails'
+  gem 'annotate'
+  gem 'faker', '0.3.1'
+
+end
+
+group :test do
+  gem 'rspec'
+  gem 'webrat'
+  gem 'factory_girl_rails', '1.0'
+
+end
