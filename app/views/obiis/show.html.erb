@@ -1,12 +1,23 @@
-<h1><%= @obii.name %></h1>
+<% i = 0 %>
+<h1><%= @obii.name %></h1><br>
 <%= image_tag(@obii.image, :alt => @obii.name, :class => "bigphoto") %>
+<div class="span8">
+    <%= render 'add_delete_this_obii' if signed_in? %>
+  </div>
 <p><h2>User with this Obii: </h2><br/>
 <div class='Obiiz' id='own'>
-<ul>
+<table>
 	<% @users.each do |user| %>
-	<li><%= image_tag(user.avatar, :alt => user.name, :class => "photo")  %></li>
+	<% i += 1 %>
+   	<% if (i == 1) || (i%9 == 0) %>
+  	<tr>
 	<% end %>
-</ul>
+      <td><%= link_to image_tag(user.avatar, :alt => user.name, :class => "photo"), user %></td>
+	<% if (i%8 == 0) ||(i%(@users.count) == 0) %>
+  	</tr>
+  	<% end %>
+	<% end %>
+</table>
 </div>
 
 <%= link_to 'Edit', edit_obii_path(@obii) %> |

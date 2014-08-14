@@ -1,11 +1,16 @@
+<% i = 0 %>
 <h1>All users</h1>
 
-<ul class="users">
+<table>
   <% @users.each do |user| %>
-    <li>
-      <%= gravatar_for user, :size => 30 %>
-      <%= link_to user.name, user %>
-    </li>
-  <% end %>
-</ul>
+	<% i += 1 %>
+   	<% if (i == 1) || (i%9 == 0) %>
+  	<tr>
+	<% end %>
+      <td><%= link_to image_tag(user.avatar, :alt => user.name, :class => "photo"), user %></td>
+	<% if (i%8 == 0) ||(i%(@users.count) == 0) %>
+  	</tr>
+  	<% end %>
+	<% end %>
+</table>
 

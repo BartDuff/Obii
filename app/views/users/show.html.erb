@@ -1,3 +1,4 @@
+<% i = 0 %>
 <h2> <% if @user == current_user %>
 Your
 <% else %>
@@ -13,11 +14,19 @@ Your
 <% end %>
 Obiiz</h2><br/>
 <div class='Obiiz' id='own'>
-<ul>
-	<% @obiis.each do |obii| %>
-	<li><%= image_for obii %></li>
+<table>
+  <% @obiis.each do |obii| %>
+  <% i += 1 %>
+   <% if (i == 1) || (i%6 == 0) %>
+  	<tr>
 	<% end %>
-</ul>
+      <td><%= link_to image_for(obii), obii %><br>
+      <%= obii.name %></td>
+	<% if (i%5 == 0) ||(i%(@obiis.count) == 0) %>
+  	</tr>
+  	<% end %>
+  <% end %>
+</table>
 </div>
 </p>
 <p>

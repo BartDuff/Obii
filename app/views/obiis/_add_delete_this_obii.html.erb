@@ -1,0 +1,9 @@
+<% unless current_user?(@user) %>
+  <div id="follow_form">
+  <% if current_user.added?(@obii) %>
+    <%= render 'remove_this_obii' %>
+  <% else %>
+    <%= render 'add_this_obii' %>
+  <% end %>
+  </div>
+<% end %>

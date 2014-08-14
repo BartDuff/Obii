@@ -49,11 +49,6 @@ class UsersController < ApplicationController
       end
       
   end
-  
-  def add_obii(obii)
-      obii = Obii.find(params[:obii_id])
-      @user.obiis << obii
-  end
 
   private
   

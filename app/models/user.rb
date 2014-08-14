@@ -43,6 +43,18 @@ class User < ActiveRecord::Base
     (user && user.salt == cookie_salt) ? user : nil
     end
 
+    def added?(obii)
+        obiis.find_by(:id)
+    end
+
+    def add!(obii)
+        obiis.create!(obii_id: obii.id)
+    end
+
+    def delete!(obii)
+        obiis_users.find_by(obii_id: obii.id).destroy
+    end
+
     private
         def encrypt_password
             self.salt = make_salt if new_record?

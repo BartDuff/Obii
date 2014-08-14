@@ -1,7 +1,21 @@
 Rails.application.routes.draw do
-    resources :users
+  get 'obiis_users/create'
+
+  get 'obiis_users/destroy'
+
+    resources :users do
+        member do
+            get :obiis
+        end
+    end
+    
     resources :sessions, :only => [:new, :create, :destroy]
-    resources :obiis
+    resources :obiis do
+        member do
+            get :users
+        end
+    end
+    resources :obiis_users, only: [:create, :destroy]
     
     get '/signup' => 'users#new'
     get '/contact' => 'pages#contact'

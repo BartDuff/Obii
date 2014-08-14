@@ -1,0 +1,2 @@
+module ObiisUsersHelper
+end
