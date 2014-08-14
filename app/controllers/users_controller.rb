@@ -27,6 +27,7 @@ class UsersController < ApplicationController
   
   def show
       @user = User.find(params[:id])
+      @obiis = @user.obiis
       @title = @user.name
   end
   
@@ -48,6 +49,11 @@ class UsersController < ApplicationController
       end
       
   end
+  
+  def add_obii(obii)
+      obii = Obii.find(params[:obii_id])
+      @user.obiis << obii
+  end
 
   private
   
@@ -61,6 +67,6 @@ class UsersController < ApplicationController
   end
   
   def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar, {:obii => []})
   end
 end

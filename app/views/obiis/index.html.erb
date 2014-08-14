@@ -1,0 +1,18 @@
+<% i = 0 %>
+<h1>All Obiiz</h1>
+<table>
+ <% if i == 1 or i%4 == 0 %>
+  	<tr>
+<% end %>
+  <% @obiis.each do |obii| %>
+  <% i += 1 %>
+      <td><%= image_for(obii) %><br>
+      <%= link_to obii.name, obii %>
+      <%= link_to 'Show', obii %>
+      <%= link_to 'Edit', edit_obii_path(obii) %>
+      <%= link_to 'Destroy', obii, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <% end %>
+  <% if i == 1 or i%4 == 0 %>
+  	</tr>
+  	<% end %>
+</table>

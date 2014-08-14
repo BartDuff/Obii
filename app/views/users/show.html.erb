@@ -1,15 +1,36 @@
-<table class="profile" summary="Information profil">
-  <tr>
-    <td class="main">
-      <h1>
-       	<%= @user.name %>
-        <%= gravatar_for @user %>
-      </h1>
-    </td>
-    <td class="sidebar round">
-      <strong>Name</strong> <%= @user.name %><br />
-      <strong>URL</strong>  <%= link_to user_path(@user), @user %>
-    </td>
-  </tr>
-</table>
+<h2> <% if @user == current_user %>
+Your
+<% else %>
+<%= "#{@user.name}'s " %>
+<% end %>
+Bubble: </h2><br>
+<%= image_tag(@user.avatar, :alt => @user.name, :class => "bigphoto") %><br>
+<h1><%= @user.name %></h1>
+<p><h2><% if @user == current_user %>
+Your
+<% else %>
+<%= "#{@user.name}'s " %>
+<% end %>
+Obiiz</h2><br/>
+<div class='Obiiz' id='own'>
+<ul>
+	<% @obiis.each do |obii| %>
+	<li><%= image_for obii %></li>
+	<% end %>
+</ul>
+</div>
+</p>
+<p>
+<h2><% if @user == current_user %>
+Your
+<% else %>
+<%= "#{@user.name}'s" %>
+<% end %>
+Friends</h2><br/>
+<div class='Friends'  id='feed'>
+</div>
+</p>
 
+<% if @user != current_user %>
+<%= link_to 'Back', users_path %>
+<% end %>

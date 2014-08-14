@@ -1,0 +1,8 @@
+<div class="field">
+<ul>
+	<% (Obii.all - @obiis).each do |obii| %>
+	<li><%= obii.name %></li>
+	<% end %>
+</ul>
+</div>
+
