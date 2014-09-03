@@ -10,9 +10,12 @@
 #
 require 'digest'
 class User < ActiveRecord::Base
+    mount_uploader :avatar, PictureUploader
     attr_accessor :password
-    
-    has_and_belongs_to_many :obiis
+    has_many :interests, :dependent => :destroy
+    has_many :obiis, through: :interests
+    has_many :moods
+    accepts_nested_attributes_for :moods
     
     email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     
@@ -32,6 +35,10 @@ class User < ActiveRecord::Base
         encrypted_password == encrypt(submitted_password)
     end
     
+    def added?(obii)
+        interests.exists?(obii_id: obii.id)
+    end
+    
     def self.authenticate(email, submitted_password)
         user = find_by_email(email)
         return nil if user.nil?
@@ -41,18 +48,6 @@ class User < ActiveRecord::Base
     def self.authenticate_with_salt(id, cookie_salt)
     user = find_by_id(id)
     (user && user.salt == cookie_salt) ? user : nil
-    end
-
-    def added?(obii)
-        obiis.find_by(:id)
-    end
-
-    def add!(obii)
-        obiis.create!(obii_id: obii.id)
-    end
-
-    def delete!(obii)
-        obiis_users.find_by(obii_id: obii.id).destroy
     end
 
     private

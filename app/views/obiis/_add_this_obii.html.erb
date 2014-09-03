@@ -1,4 +1,5 @@
-<%= form_for(current_user.obiis.build({id: @obii.id}), :remote => true, :url => obiis_users_path) do |f| %>
-  <div><%= f.hidden_field :id %></div>
-  <%= f.submit "+", class: "button", id: "addObii" %>
+<%= form_for(@interest) do |f| %>
+<%= f.hidden_field :obii_id, value: @obii.id %>
+<%= f.hidden_field :user_id %>
+<%= f.submit "+", class: "button", id: "addObii" %>
 <% end %>

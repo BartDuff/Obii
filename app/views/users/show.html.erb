@@ -1,12 +1,23 @@
-<% i = 0 %>
 <h2> <% if @user == current_user %>
 Your
 <% else %>
 <%= "#{@user.name}'s " %>
 <% end %>
 Bubble: </h2><br>
-<%= image_tag(@user.avatar, :alt => @user.name, :class => "bigphoto") %><br>
-<h1><%= @user.name %></h1>
+<%= image_tag(@user.avatar_url, :alt => @user.name, :class => "bigphoto") %><br>
+<h1><%= @user.name %></h1><br/>
+<% if @user == current_user %>
+<p><%= link_to "What are you up to?", new_mood_path, id: 'addObii' %></p><br/>
+<% end %>
+<div class='Obiiz' id='own'>
+<%= image_tag(@moods.last.user.avatar_url, :class => 'photo', :title => @moods.last.user.name) %>
+<%= image_tag(@moods.last.obii.image_url, :class => 'photo', :title => @moods.last.obii.name) %>
+<p><%= "Starts: #{@moods.last.starts}" %><br/>
+<%= "Ends: #{@moods.last.ends}" %><br/>
+<%= "Min group: #{@moods.last.mingroup}" %><br/>
+<%= "Max group: #{@moods.last.maxgroup}" %><br/>
+</p>
+</div>
 <p><h2><% if @user == current_user %>
 Your
 <% else %>
@@ -15,17 +26,12 @@ Your
 Obiiz</h2><br/>
 <div class='Obiiz' id='own'>
 <table>
+<tr>
   <% @obiis.each do |obii| %>
-  <% i += 1 %>
-   <% if (i == 1) || (i%6 == 0) %>
-  	<tr>
-	<% end %>
-      <td><%= link_to image_for(obii), obii %><br>
+      <td><%= link_to image_tag(obii.image_url, :class => 'photo'), obii %><br>
       <%= obii.name %></td>
-	<% if (i%5 == 0) ||(i%(@obiis.count) == 0) %>
-  	</tr>
-  	<% end %>
   <% end %>
+  </tr>
 </table>
 </div>
 </p>

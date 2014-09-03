@@ -1,15 +1,4 @@
-<% logo = image_tag("obii_logo.png", :alt => "Obii", :class => "biglogo") %>
-<%= link_to logo, root_path %>
-<% if !signed_in? %>
-<div class="sign">
-	<h2>Ready to open your bubble?</h2><br>
-	<%= render 'sessions/new_user' %>
-	<% regbutton = button_tag("Or register now!") %>
-    <%= link_to regbutton, signup_path, :class => "signup" %>
-</div>
-<% else %>
+<% if signed_in? %>
 <h2> You are already connected! Enjoy! </h2>
-<% end %><br>
-<div class='nav'>
-	<h1> Get out of your Bubble! </h1>
-</div>
+<br>
+<% end %>

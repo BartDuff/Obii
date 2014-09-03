@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
     before_filter :authenticate, :only => [:index, :edit, :update]
     before_filter :correct_user, :only => [:edit, :update]
+    before_action :signed_in_user, only: [:edit, :update]
     
   def new
       @user = User.new
@@ -28,6 +29,7 @@ class UsersController < ApplicationController
   def show
       @user = User.find(params[:id])
       @obiis = @user.obiis
+      @moods = @user.moods
       @title = @user.name
   end
   
@@ -58,10 +60,14 @@ class UsersController < ApplicationController
   
   def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
+      redirect_to(root_url) unless current_user?(@user)
   end
   
   def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar, {:obii => []})
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)
+  end
+  
+  def signed_in_user
+      redirect_to login_url, notice: "Please sign in." unless signed_in?
   end
 end

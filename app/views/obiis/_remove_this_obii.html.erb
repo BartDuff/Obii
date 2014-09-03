@@ -1,4 +1,1 @@
-<%= form_for(current_user.obiis.find_by({id: @obii.id}),
-             html: { method: :delete }, :remote => true, :url => obiis_users_path) do |f| %>
-  <%= f.submit "-", class: "button", id: "addObii" %>
-<% end %>
+<%= button_to "-", interest_path(@interest), :method => 'delete', :class => 'button', :id => 'addObii' %>

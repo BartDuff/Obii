@@ -1,0 +1,12 @@
+<h1>All Moods</h1>
+<ul>
+  <% @moods.each do |mood| %>
+	<li><%= mood.user.name %><br/>
+	<%= mood.obii.name %>
+	<%= mood.starts %>
+	<%= mood.ends %>
+	<%= mood.maxgroup %>
+	<%= mood.mingroup %>
+	<%= link_to "Show", mood_path(mood) %></li>
+  <% end %>
+</ul>

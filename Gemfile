@@ -42,7 +42,7 @@ group :development do
   gem 'rspec-rails'
   gem 'annotate'
   gem 'faker', '0.3.1'
-
+  gem 'better_errors'
 end
 
 group :test do
@@ -51,3 +51,7 @@ group :test do
   gem 'factory_girl_rails', '1.0'
 
 end
+
+gem 'carrierwave'
+
+gem "binding_of_caller"

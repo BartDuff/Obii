@@ -1,4 +1,6 @@
 class ObiisController < ApplicationController
+        skip_before_action :verify_authenticity_token
+    
   def new
       @title = "New Obii"
       @obii = Obii.new
@@ -16,6 +18,8 @@ class ObiisController < ApplicationController
 
   def show
       @obii = Obii.find(params[:id])
+      @user = current_user
+      @interest = @user.obiis.include?(@obii)? @user.interests.find_by_obii_id(@obii.id) : @user.interests.build
       @users = @obii.users
       @title = @obii.name
   end
@@ -48,6 +52,6 @@ class ObiisController < ApplicationController
   private
   
   def obii_params
-      params.require(:obii).permit(:name, :image, {:user => []})
+      params.require(:obii).permit(:name, :image)
   end
 end

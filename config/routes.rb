@@ -1,22 +1,12 @@
 Rails.application.routes.draw do
-  get 'obiis_users/create'
-
-  get 'obiis_users/destroy'
-
-    resources :users do
-        member do
-            get :obiis
-        end
-    end
     
+    resources :users
     resources :sessions, :only => [:new, :create, :destroy]
-    resources :obiis do
-        member do
-            get :users
-        end
-    end
-    resources :obiis_users, only: [:create, :destroy]
+    resources :obiis
+    resources :interests, :only => [:new, :create, :destroy], :dependent => :obiis
+    resources :moods
     
+    get '/home' => 'pages#home'
     get '/signup' => 'users#new'
     get '/contact' => 'pages#contact'
     get '/about' => 'pages#about'
@@ -28,7 +18,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root :to => 'pages#home'
+  root :to => 'sessions#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

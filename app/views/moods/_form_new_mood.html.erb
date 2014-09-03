@@ -1,0 +1,24 @@
+<%= form_for(@mood, {:action => :create}) do |f| %>
+	<%= render 'shared/error_messages', :object => f.object %>
+  	<%= f.hidden_field :user_id, value: current_user.id %>
+  	<%= f.hidden_field :starts, value: Time.now %>
+  <div class="field">
+    <%= f.label :obii_id, "Pick the Obii you're in the mood to  do: " %><br />
+    <%= f.collection_select :obii_id, current_user.obiis.all, :id, :name %>
+  </div>
+  <div class="field">
+    <%= f.label :ends, "Will end: " %><br />
+    <%= f.datetime_select :ends %>
+  </div>
+  <div class="field">
+    <%= f.label :maxgroup, "The group should be a maximum of: " %><br />
+    <%= f.number_field :maxgroup %>
+  </div>
+   <div class="field">
+    <%= f.label :mingroup, "The group should be a minimum of: " %><br />
+    <%= f.number_field :mingroup %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Tell people!" %>
+  </div>
+<% end %>

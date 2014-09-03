@@ -1,16 +1,17 @@
-<% i = 0 %>
+<% i = 1 %>
 <h1>All users</h1>
 
 <table>
+<tr>
   <% @users.each do |user| %>
+      <td><%= link_to image_tag(user.avatar_url, :alt => user.name, :class => "photo"), user %></td>
+	<% if (i != 0) %>
+		<% if (i%8 == 0) && (i != @users.count-1) %>
+		</tr><tr>
+		<% else %>
+		<% end %>
+	<% end %>
 	<% i += 1 %>
-   	<% if (i == 1) || (i%9 == 0) %>
-  	<tr>
-	<% end %>
-      <td><%= link_to image_tag(user.avatar, :alt => user.name, :class => "photo"), user %></td>
-	<% if (i%8 == 0) ||(i%(@users.count) == 0) %>
-  	</tr>
   	<% end %>
-	<% end %>
 </table>
 

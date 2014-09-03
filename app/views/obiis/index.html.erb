@@ -1,15 +1,16 @@
-<% i = 0 %>
+<% i = 1 %>
 <h1>All Obiiz</h1>
 <table>
+<tr>
   <% @obiis.each do |obii| %>
-  <% i += 1 %>
-   <% if (i == 1) || (i%9 == 0) %>
-  	<tr>
-	<% end %>
-      <td><%= link_to image_for(obii), obii %><br>
+      <td><%= link_to image_tag(obii.image_url, :class => 'photo'), obii %><br>
       <%= obii.name %></td>
-	<% if (i%8 == 0) ||(i%(@obiis.count) == 0) %>
-  	</tr>
-  	<% end %>
+	<% if i != 0 %>
+		<% if (i%8 == 0) && (i != @obiis.count-1) %>
+		</tr><tr>
+		<% else %>
+		<% end %>
+	<% end %>
+	<% i += 1 %>
   <% end %>
 </table>

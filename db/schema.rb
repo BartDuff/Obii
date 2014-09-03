@@ -11,7 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813235007) do
+ActiveRecord::Schema.define(version: 20140828013645) do
+
+  create_table "interests", force: true do |t|
+    t.integer  "obii_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "interests", ["obii_id", "user_id"], name: "index_interests_on_obii_id_and_user_id", unique: true
+
+  create_table "moods", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "obii_id"
+    t.integer  "maxgroup"
+    t.integer  "mingroup"
+    t.datetime "starts"
+    t.datetime "ends"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "obiis", force: true do |t|
     t.string   "name"
@@ -22,11 +42,6 @@ ActiveRecord::Schema.define(version: 20140813235007) do
 
   add_index "obiis", ["image"], name: "index_obiis_on_image", unique: true
   add_index "obiis", ["name"], name: "index_obiis_on_name", unique: true
-
-  create_table "obiis_users", id: false, force: true do |t|
-    t.integer "obii_id"
-    t.integer "user_id"
-  end
 
   create_table "users", force: true do |t|
     t.string   "name"
