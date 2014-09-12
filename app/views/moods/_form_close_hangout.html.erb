@@ -1,0 +1,6 @@
+<%= form_for @mood, url: mood_path(@mood), method: :patch do |f| %>
+<div>
+	<%= f.hidden_field :open, value: false %>
+	<%= f.submit "End this mood!" %>
+</div>
+<% end %>

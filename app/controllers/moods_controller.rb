@@ -39,6 +39,7 @@ class MoodsController < ApplicationController
       @user = current_user
       @mood = Mood.find(params[:id])
       @title = "#{@user.name} in the mood for #{@mood.obii.name}"
+      @hangout = current_user.applied?(@mood)? current_user.hangouts.find_by_mood_id(@mood.id) : current_user.hangouts.build
   end
 
   def destroy

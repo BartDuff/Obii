@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140828013645) do
+ActiveRecord::Schema.define(version: 20140903174359) do
+
+  create_table "hangouts", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "mood_id"
+    t.boolean  "accept",     default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "hangouts", ["user_id", "mood_id"], name: "index_hangouts_on_user_id_and_mood_id", unique: true
 
   create_table "interests", force: true do |t|
     t.integer  "obii_id"
@@ -31,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140828013645) do
     t.datetime "ends"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "open",       default: true
   end
 
   create_table "obiis", force: true do |t|

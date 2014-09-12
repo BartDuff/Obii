@@ -1,12 +1,13 @@
 <h1>All Moods</h1>
-<ul>
-  <% @moods.each do |mood| %>
-	<li><%= mood.user.name %><br/>
-	<%= mood.obii.name %>
-	<%= mood.starts %>
-	<%= mood.ends %>
-	<%= mood.maxgroup %>
-	<%= mood.mingroup %>
-	<%= link_to "Show", mood_path(mood) %></li>
-  <% end %>
-</ul>
+<% @moods.each do |mood| %>
+<div class='Obiiz' id='own'>
+<%= image_tag(mood.user.avatar_url, :class => 'photo', :title => mood.user.name) %>
+<%= image_tag(mood.obii.image_url, :class => 'photo', :title => mood.obii.name) %>
+<p><%= "Starts: #{mood.starts}" %><br/>
+<%= "Ends: #{mood.ends}" %><br/>
+<%= "Min group: #{mood.mingroup}" %><br/>
+<%= "Max group: #{mood.maxgroup}" %><br/>
+</p>
+<%= link_to "Show", mood_path(mood) %>
+</div>
+<% end %>

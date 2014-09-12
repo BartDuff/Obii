@@ -6,6 +6,9 @@
     <%= render 'layouts/stylesheets' %>
   </head>
   <body>
+  <% Mood.all.each do |mood| %>
+  <% mood.close! %>
+  <% end %>
   <div class= "container">
   	<% if signed_in? %>
    	<%= render 'layouts/header' %>

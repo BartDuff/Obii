@@ -7,7 +7,20 @@
 <%= "Max group: #{@mood.maxgroup}" %><br/>
 </p>
 </div>
-
+<% if @mood.user != current_user %>
+	<% if @mood.open == true %>
+	<div><%= render 'hangout_form' %></div>
+	<% else %>
+	This mood has ended
+	<% end %>
+<% else %>
+	<% if @mood.open == true %>
+	<div><%= render 'form_close_hangout' %></div>
+	<% else %>
+	You have ended this mood
+	<% end %>
 <%= link_to 'Edit', edit_mood_path(@mood) %>
 <%= link_to 'Back', user_path(current_user) %>
 <%= link_to 'Destroy', @mood, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+

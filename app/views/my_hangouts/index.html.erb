@@ -1,0 +1,31 @@
+<h1>My Hangouts</h1>
+<h2>What's on my mind: </h2>
+  <% @moods.where(open: true).each do |mood| %>
+<div class='Obiiz' id='own'>
+<%= image_tag(mood.user.avatar_url, :class => 'photo', :title => mood.user.name) %>
+<%= image_tag(mood.obii.image_url, :class => 'photo', :title => mood.obii.name) %>
+<p><%= "Starts: #{mood.starts}" %><br/>
+<%= "Ends: #{mood.ends}" %><br/>
+<%= "Min group: #{mood.mingroup}" %><br/>
+<%= "Max group: #{mood.maxgroup}" %><br/>
+</p>
+<%= link_to "Show", mood_path(mood) %>
+<%= link_to "Edit", edit_mood_path(mood) %>
+<%= link_to "Delete", mood_path(mood), method: :delete %>
+</div>
+<% end %>
+<h2>What I'm interested in: </h2>
+  <% @hangouts.each do |hangout| %>
+  	<% if (hangout.mood.open == true) %>
+  	<div class='Obiiz' id='own'>
+	<%= image_tag(hangout.mood.user.avatar_url, :class => 'photo', :title => hangout.mood.user.name) %>
+	<%= image_tag(hangout.mood.obii.image_url, :class => 'photo', :title => hangout.mood.obii.name) %>
+	<p><%= "Starts: #{hangout.mood.starts}" %><br/>
+	<%= "Ends: #{hangout.mood.ends}" %><br/>
+	<%= "Min group: #{hangout.mood.mingroup}" %><br/>
+	<%= "Max group: #{hangout.mood.maxgroup}" %><br/>
+	</p>
+	<%= link_to "Show", hangout.mood %></li>
+  <% end %>
+  </div>
+  <% end %>

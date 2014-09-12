@@ -1,0 +1,7 @@
+<%= form_for(@hangout, remote: true) do |f| %>
+<div>
+	<%= f.hidden_field :mood_id, value: @mood.id %>
+	<%= f.hidden_field :user_id, value: current_user.id %>
+	<%= f.submit "Request Hangout!" %>
+</div>
+<% end %>

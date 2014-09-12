@@ -1,0 +1,7 @@
+<div>
+<% if current_user.applied?(@mood) %>
+<% render 'form_withdraw_hangout' %>
+<% else %>
+<%= render 'form_apply_hangout' %>
+<% end %>
+</div>

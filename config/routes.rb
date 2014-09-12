@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
     
+  get 'my_hangouts/index'
+
     resources :users
     resources :sessions, :only => [:new, :create, :destroy]
     resources :obiis
     resources :interests, :only => [:new, :create, :destroy], :dependent => :obiis
     resources :moods
+    resources :hangouts
     
     get '/home' => 'pages#home'
     get '/signup' => 'users#new'

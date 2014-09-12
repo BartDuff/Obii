@@ -1,6 +1,11 @@
 class SessionsController < ApplicationController
   def new
+      if signed_in?
+          flash[:success] = "You are connected. Get out of your Bubble!"
+          redirect_to '/home'
+      else
       @title = "Login"
+      end
   end
   
   def create

@@ -1,0 +1,2 @@
+module MyHangoutsHelper
+end

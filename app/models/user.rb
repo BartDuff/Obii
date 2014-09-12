@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
     has_many :obiis, through: :interests
     has_many :moods
     accepts_nested_attributes_for :moods
+    has_many :hangouts
     
     email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     
@@ -37,6 +38,10 @@ class User < ActiveRecord::Base
     
     def added?(obii)
         interests.exists?(obii_id: obii.id)
+    end
+    
+    def applied?(mood)
+        self.hangouts.exists?(mood_id: mood.id)
     end
     
     def self.authenticate(email, submitted_password)
